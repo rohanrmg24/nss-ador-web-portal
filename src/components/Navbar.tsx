@@ -62,7 +62,8 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
         <a href="#home" className="flex items-center" onClick={() => handleNavClick('#home')}>
-          <span className="text-primary font-bold text-2xl">NSS HSS Adoor</span>
+          <span className="text-primary font-bold text-2xl">
+          NSS Higher Secondary School Adoor</span>
         </a>
         
         {/* Desktop Navigation */}
