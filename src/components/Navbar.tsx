@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Menu } from 'lucide-react';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,7 +12,6 @@ const Navbar = () => {
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
     { name: 'Academics', href: '#academics' },
-    { name: 'Admission', href: '#admission' },
     { name: 'Events', href: '#events' },
     { name: 'Gallery', href: '#gallery' },
     { name: 'Contact', href: '#contact' }
@@ -25,7 +25,6 @@ const Navbar = () => {
         setScrolled(false);
       }
 
-      // Check which section is currently in view
       const sections = navItems.map(item => item.href.substring(1));
       for (const section of sections.reverse()) {
         const element = document.getElementById(section);
@@ -62,78 +61,53 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
         <a href="#home" className="flex items-center" onClick={() => handleNavClick('#home')}>
-          <span className="text-primary font-bold text-2xl">
-          NSS Higher Secondary School Adoor</span>
+          <span className="text-primary font-bold text-lg md:text-2xl">NSS HSS Adoor</span>
         </a>
         
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-6">
-          {navItems.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              className={`text-gray-700 hover:text-primary font-medium relative group ${
-                activeSection === item.href.substring(1) ? 'text-primary' : ''
-              }`}
-              onClick={(e) => {
-                e.preventDefault();
-                handleNavClick(item.href);
-              }}
-            >
-              {item.name}
-              <motion.div 
-                className={`absolute bottom-0 left-0 h-0.5 bg-primary ${
-                  activeSection === item.href.substring(1) ? 'w-full' : 'w-0'
-                }`}
-                initial={{ width: 0 }}
-                animate={{ width: activeSection === item.href.substring(1) ? '100%' : '0%' }}
-                whileHover={{ width: '100%' }}
-                transition={{ duration: 0.3 }}
-              />
-            </a>
-          ))}
-        </div>
-        
-        {/* Mobile Navigation Toggle */}
         <button 
-          className="md:hidden focus:outline-none" 
+          className="focus:outline-none z-20" 
           onClick={() => setIsOpen(!isOpen)}
           aria-expanded={isOpen}
           aria-label="Toggle navigation menu"
         >
-          <div className="w-6 h-5 flex flex-col justify-between">
-            <span className={`h-0.5 w-full bg-gray-700 transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
-            <span className={`h-0.5 w-full bg-gray-700 transition-all duration-300 ${isOpen ? 'opacity-0' : 'opacity-100'}`}></span>
-            <span className={`h-0.5 w-full bg-gray-700 transition-all duration-300 ${isOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
-          </div>
+          <Menu className="h-6 w-6 text-gray-700" />
         </button>
+
+        {/* Navigation Menu - Now as an overlay */}
+        <motion.div 
+          className={`fixed inset-0 bg-white ${isOpen ? 'flex' : 'hidden'} flex-col items-center justify-center`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isOpen ? 1 : 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <div className="flex flex-col items-center space-y-6">
+            {navItems.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                className={`text-xl font-medium relative group ${
+                  activeSection === item.href.substring(1) ? 'text-primary' : 'text-gray-700'
+                }`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick(item.href);
+                }}
+              >
+                {item.name}
+                <motion.div 
+                  className={`absolute bottom-0 left-0 h-0.5 bg-primary ${
+                    activeSection === item.href.substring(1) ? 'w-full' : 'w-0'
+                  }`}
+                  initial={{ width: 0 }}
+                  animate={{ width: activeSection === item.href.substring(1) ? '100%' : '0%' }}
+                  whileHover={{ width: '100%' }}
+                  transition={{ duration: 0.3 }}
+                />
+              </a>
+            ))}
+          </div>
+        </motion.div>
       </div>
-      
-      {/* Mobile Navigation Menu */}
-      <motion.div 
-        className={`md:hidden bg-white absolute w-full shadow-md ${isOpen ? 'block' : 'hidden'}`}
-        initial={{ opacity: 0, height: 0 }}
-        animate={{ opacity: isOpen ? 1 : 0, height: isOpen ? 'auto' : 0 }}
-        transition={{ duration: 0.3 }}
-      >
-        <div className="container mx-auto px-4 py-4 flex flex-col">
-          {navItems.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              className={`py-3 border-b border-gray-100 hover:text-primary ${
-                activeSection === item.href.substring(1) ? 'text-primary' : 'text-gray-700'
-              }`}
-              onClick={(e) => {
-                e.preventDefault();
-                handleNavClick(item.href);
-              }}
-            >
-              {item.name}
-            </a>
-          ))}
-        </div>
-      </motion.div>
     </nav>
   );
 };

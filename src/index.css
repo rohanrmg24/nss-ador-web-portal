@@ -104,11 +104,12 @@
 .news-ticker {
   white-space: nowrap;
   overflow: hidden;
+  width: 100%;
 }
 
 .news-ticker-content {
   display: inline-block;
-  animation: marquee 20s linear infinite;
+  animation: marquee 40s linear infinite;
   padding-right: 50px;
 }
 
@@ -119,6 +120,12 @@
 @keyframes marquee {
   0% { transform: translateX(100%); }
   100% { transform: translateX(-100%); }
+}
+
+/* Remove horizontal scrollbar */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 /* Section transitions */
