@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
 @tailwind base;
@@ -100,7 +99,7 @@
   }
 }
 
-/* News Ticker */
+/* News Ticker with slower speed */
 .news-ticker {
   white-space: nowrap;
   overflow: hidden;
@@ -109,7 +108,7 @@
 
 .news-ticker-content {
   display: inline-block;
-  animation: marquee 40s linear infinite;
+  animation: marquee 60s linear infinite;
   padding-right: 50px;
 }
 

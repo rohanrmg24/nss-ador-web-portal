@@ -1,3 +1,4 @@
+
 import { motion } from 'framer-motion';
 
 const Hero = () => {
@@ -10,7 +11,7 @@ const Hero = () => {
   ];
 
   return (
-    <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
       <div 
         className="absolute inset-0 bg-cover bg-center"
@@ -25,7 +26,7 @@ const Hero = () => {
       {/* Content */}
       <div className="container mx-auto px-4 z-10 text-center">
         <motion.h1 
-          className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl text-white font-bold mb-4 md:mb-6"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-white font-bold mb-4 md:mb-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -34,7 +35,7 @@ const Hero = () => {
         </motion.h1>
         
         <motion.p 
-          className="text-lg md:text-xl lg:text-2xl text-white mb-6 md:mb-8"
+          className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white mb-6 md:mb-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -50,7 +51,7 @@ const Hero = () => {
         >
           <a 
             href="#academics" 
-            className="btn-primary text-sm md:text-base"
+            className="btn-primary text-base sm:text-lg transform hover:scale-105 transition-transform duration-300"
             onClick={(e) => {
               e.preventDefault();
               const element = document.querySelector('#academics');
@@ -63,18 +64,33 @@ const Hero = () => {
           >
             Explore Academics
           </a>
+          <a 
+            href="#admission" 
+            className="btn-secondary text-base sm:text-lg transform hover:scale-105 transition-transform duration-300"
+            onClick={(e) => {
+              e.preventDefault();
+              const element = document.querySelector('#admission');
+              if (element) {
+                const yOffset = -60;
+                const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                window.scrollTo({ top: y, behavior: 'smooth' });
+              }
+            }}
+          >
+            Apply Now
+          </a>
         </motion.div>
       </div>
       
       {/* News Ticker with slower speed */}
-      <div className="absolute bottom-0 left-0 right-0 bg-white py-2 md:py-3 shadow-md">
+      <div className="absolute bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm py-2 md:py-3 shadow-md">
         <div className="container mx-auto px-4">
           <div className="flex items-center">
             <div className="bg-primary text-white px-3 md:px-4 py-1 rounded-md mr-4 whitespace-nowrap">
               <span className="text-sm md:text-base font-bold">Latest News</span>
             </div>
             <div className="news-ticker overflow-hidden">
-              <div className="news-ticker-content animate-marquee">
+              <div className="news-ticker-content animate-marquee" style={{ animationDuration: '60s' }}>
                 {newsTicker.map((news, index) => (
                   <span key={index} className="mr-12 text-gray-700 text-sm md:text-base">{news}</span>
                 ))}
