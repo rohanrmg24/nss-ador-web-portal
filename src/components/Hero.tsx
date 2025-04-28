@@ -20,14 +20,13 @@ const Hero = () => {
           filter: 'brightness(0.7)' 
         }}
       >
-        {/* Parallax Effect Overlay */}
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
       </div>
       
       {/* Content */}
       <div className="container mx-auto px-4 z-10 text-center">
         <motion.h1 
-          className="text-4xl md:text-5xl lg:text-6xl text-white font-bold mb-6"
+          className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-white font-bold mb-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -36,7 +35,7 @@ const Hero = () => {
         </motion.h1>
         
         <motion.p 
-          className="text-xl md:text-2xl text-white mb-8"
+          className="text-lg md:text-xl lg:text-2xl text-white mb-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -52,7 +51,7 @@ const Hero = () => {
         >
           <a 
             href="#academics" 
-            className="btn-primary"
+            className="btn-primary text-base md:text-lg"
             onClick={(e) => {
               e.preventDefault();
               const element = document.querySelector('#academics');
@@ -65,37 +64,21 @@ const Hero = () => {
           >
             Explore Academics
           </a>
-          <a 
-            href="#admission" 
-            className="btn-secondary"
-            onClick={(e) => {
-              e.preventDefault();
-              const element = document.querySelector('#admission');
-              if (element) {
-                const yOffset = -60;
-                const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-                window.scrollTo({ top: y, behavior: 'smooth' });
-              }
-            }}
-          >
-            Apply Now
-          </a>
         </motion.div>
       </div>
       
-      {/* News Ticker */}
+      {/* News Ticker with slower animation */}
       <div className="absolute bottom-0 left-0 right-0 bg-white py-3 shadow-md">
         <div className="container mx-auto px-4">
-          <div className="flex items-center">
+          <div className="flex items-center overflow-hidden">
             <div className="bg-primary text-white px-4 py-1 rounded-md mr-4 whitespace-nowrap">
               <span className="font-bold">Latest News</span>
             </div>
             <div className="news-ticker overflow-hidden">
-              <div className="news-ticker-content animate-marquee">
+              <div className="news-ticker-content" style={{ animation: 'marquee 40s linear infinite' }}>
                 {newsTicker.map((news, index) => (
                   <span key={index} className="mr-12 text-gray-700">{news}</span>
                 ))}
-                {/* Repeat for smooth looping */}
                 {newsTicker.map((news, index) => (
                   <span key={`repeat-${index}`} className="mr-12 text-gray-700">{news}</span>
                 ))}
