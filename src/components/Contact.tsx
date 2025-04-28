@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Input } from "@/components/ui/input";
@@ -6,8 +5,24 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from 'sonner';
 
+interface FormData {
+  name: string;
+  email: string;
+  phone: string;
+  subject: string;
+  message: string;
+}
+
+interface FormErrors {
+  name?: string;
+  email?: string;
+  phone?: string;
+  subject?: string;
+  message?: string;
+}
+
 const Contact = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
     phone: '',
@@ -15,21 +30,20 @@ const Contact = () => {
     message: ''
   });
   
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
     
-    // Clear error when user starts typing
-    if (errors[name]) {
+    if (errors[name as keyof FormErrors]) {
       setErrors(prev => ({ ...prev, [name]: null }));
     }
   };
   
-  const validate = () => {
-    const newErrors = {};
+  const validate = (): FormErrors => {
+    const newErrors: FormErrors = {};
     
     if (!formData.name.trim()) {
       newErrors.name = 'Name is required';
@@ -58,7 +72,7 @@ const Contact = () => {
     return newErrors;
   };
   
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
     const validationErrors = validate();
@@ -69,7 +83,6 @@ const Contact = () => {
     
     setIsSubmitting(true);
     
-    // Simulate form submission
     setTimeout(() => {
       toast.success("Form submitted successfully! We'll get back to you soon.");
       setFormData({
@@ -83,7 +96,7 @@ const Contact = () => {
     }, 1500);
   };
   
-  const copyToClipboard = (text) => {
+  const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text).then(() => {
       toast.success("Copied to clipboard!");
     }).catch(err => {
@@ -110,7 +123,6 @@ const Contact = () => {
         </motion.div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -198,14 +210,12 @@ const Contact = () => {
             </div>
           </motion.div>
           
-          {/* Contact Info & Map */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            {/* Contact Information */}
             <div className="bg-white p-8 rounded-lg shadow-md mb-8">
               <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
               
@@ -280,7 +290,6 @@ const Contact = () => {
                 </div>
               </div>
               
-              {/* Social Media Links */}
               <div className="mt-8">
                 <h4 className="text-lg font-semibold mb-4">Follow Us</h4>
                 <div className="flex space-x-4">
@@ -324,7 +333,6 @@ const Contact = () => {
               </div>
             </div>
             
-            {/* Map */}
             <div className="bg-white p-4 rounded-lg shadow-md overflow-hidden">
               <h3 className="text-lg font-bold mb-4">Find Us</h3>
               <div className="h-80 w-full">
@@ -343,7 +351,6 @@ const Contact = () => {
           </motion.div>
         </div>
         
-        {/* Newsletter Signup */}
         <motion.div 
           className="mt-20 bg-primary bg-opacity-10 rounded-lg p-8"
           initial={{ opacity: 0, y: 30 }}
