@@ -16,7 +16,7 @@ const Hero = () => {
       <div 
         className="absolute inset-0 bg-cover bg-center"
         style={{ 
-          backgroundImage: `url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80')`,
+          backgroundImage: `url('https://lh3.googleusercontent.com/gps-cs-s/AB5caB_iepHY9qvJlAZSD6218kbpdn4nTS2wEB_DqLh7DGM2UAFnmhYMs7DSH8PqV6win8vzvm2aEVv3710gjI-toXPQ_2wXkRSsrvr_nn_Qmc_TRlM6RhjoaAYWRyVwtMP11xzB0W8k=s1360-w1360-h1020-rw')`,
           filter: 'brightness(0.7)' 
         }}
       >
@@ -32,7 +32,7 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          NSS Higher Secondary School
+          NSS Higher Secondary School Adoor
         </motion.h1>
         
         <motion.p 
